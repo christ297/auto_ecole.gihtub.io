@@ -1,0 +1,16 @@
+.glass-card {
+
+    
+  font-size:17px;
+  color: #666;
+  text-align:justify;
+  font-family: var(--family);
+  background: rgb(0,159,231);
+  background: linear-gradient(326deg, rgba(147,13,224,1) 0%, rgba(0,159,231,1) 15%, rgba(0,222,223,1) 50%, rgba(156,0,224,1) 100%);
+  background-repeat:no-repeat;
+  background-size: 100% 600%;
+  min-height: 100%;
+  label,h1{
+    color: aliceblue;
+  }
+}

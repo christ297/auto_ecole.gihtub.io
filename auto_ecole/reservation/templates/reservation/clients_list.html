@@ -35,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for reservation in reservations %}
+                {% for reservation in page_obj %}
                     <tr>
                         <td>{{ reservation.nom }}</td>
                         <td>{{ reservation.email }}</td>

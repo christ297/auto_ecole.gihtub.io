@@ -1,4 +1,6 @@
 {% load bootstrap_filters %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,41 +9,60 @@
     <title>Réservation d'une leçon de conduite</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'reservation/styles.css' %}">
+
 </head>
 <body>
     <div class="container mt-5">
+        <div class="row">
+            <div class="col card glass-card">
+
+
         <h1 class="mb-4">Réservez votre leçon de conduite</h1>
 
         <form method="post">
             {% csrf_token %}
-            <div class="mb-3">
+            <div class="col-md-10">
                 <label for="id_nom" class="form-label">Nom</label>
                 {{ form.nom|add_class:"form-control" }}
             </div>
             
-            <div class="mb-3">
+            <div class="col-md-10">
                 <label for="id_email" class="form-label">Email</label>
                 {{ form.email|add_class:"form-control" }}
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-10">
                 <label for="id_date_reservation" class="form-label">Date</label>
                 {{ form.date_reservation }}
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-10">
                 <label for="id_heure_reservation" class="form-label">Heure</label>
                 {{ form.heure_reservation }}
             </div>
 
-            <div class="mb-3">
+            <div class="col-md-10">
                 <label for="id_type_vehicule" class="form-label">Type de véhicule</label>
                 {{ form.type_vehicule|add_class:"form-select" }}
             </div>
 
-            <button type="submit" class="btn btn-primary">Réserver</button>
+            <button type="submit" class="btn btn-primary my-4 ">Réserver</button>
         </form>
     </div>
+    <div class="col">
+
+        <div class=" ">
+            <img src="/static/images/book.jpg" alt="Leçon de conduite" class="img-fluid rounded">
+        </div>
+
+    </div>
+
+    </div>
+
+
+</div>
+<a href="{% url 'admin_login' %}" class="d-flex p-2 bd-highlight">Admin</a>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

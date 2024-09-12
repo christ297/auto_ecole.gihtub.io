@@ -56,6 +56,8 @@ def clients_list_view(request):
     return render(request, 'reservation/clients_list.html', {
         'reservations': reservations,
         'page_obj': page_obj,
+        'paginator':paginator,
+        'page_number':page_number,
         'query_nom': query_nom,
         'query_date': query_date,
     })
