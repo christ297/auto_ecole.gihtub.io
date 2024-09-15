@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+#api key for paygate
+
+PAYGATE_API_TOKEN = 'votre_cle_api_paygate_global'
+
 # Application definition
 
 INSTALLED_APPS = [

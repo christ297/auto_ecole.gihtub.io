@@ -1,5 +1,7 @@
 from django import forms
 from .models import Reservation
+from django import forms
+from .models import Transaction
 
 class ReservationForm(forms.ModelForm):
     class Meta:
@@ -9,3 +11,8 @@ class ReservationForm(forms.ModelForm):
             'date_reservation': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'heure_reservation': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
         }
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['phone_number', 'amount', 'description', 'network']

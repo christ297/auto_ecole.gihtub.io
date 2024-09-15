@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
 from .forms import ReservationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Reservation
 from django.core.paginator import Paginator
+import requests
+import uuid
+from django.shortcuts import render, redirect,get_object_or_404
+from django.conf import settings
+from .forms import PaymentForm
+from .models import Transaction
 
 def reservation_view(request):
     if request.method == 'POST':
@@ -61,3 +66,58 @@ def clients_list_view(request):
         'query_nom': query_nom,
         'query_date': query_date,
     })
+
+
+def payment_view(request):
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            transaction.identifier = str(uuid.uuid4())  # Générer un identifiant unique
+            transaction.save()
+
+            # Paramètres requis pour l'API PayGateGlobal
+            payload = {
+                "auth_token": settings.PAYGATE_API_TOKEN,
+                "phone_number": transaction.phone_number,
+                "amount": str(transaction.amount),
+                "description": transaction.description,
+                "identifier": transaction.identifier,
+                "network": transaction.network,
+            }
+
+            # URL de l'API PayGateGlobal
+            url = "https://paygateglobal.com/api/v1/pay"
+
+            try:
+                response = requests.post(url, json=payload)
+                data = response.json()
+
+                if data.get('status') == "0":
+                    # Transaction initiée avec succès
+                    transaction.tx_reference = data.get('tx_reference')
+                    transaction.status = "Transaction enregistrée"
+                    transaction.save()
+                    return redirect('payment_success', transaction_id=transaction.id)
+                else:
+                    # Gérer les erreurs de transaction
+                    transaction.status = "Erreur lors de l'enregistrement"
+                    transaction.save()
+                    return redirect('payment_failed')
+
+            except Exception as e:
+                # Gérer les exceptions
+                print(f"Erreur: {e}")
+                return redirect('payment_failed')
+    else:
+        form = PaymentForm()
+
+    return render(request, 'reservation/payment_form.html', {'form': form})
+
+
+def payment_success(request, transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    return render(request, 'reservation/payment_success.html', {'transaction': transaction})
+
+def payment_failed(request):
+    return render(request, 'reservation/payment_failed.html')
