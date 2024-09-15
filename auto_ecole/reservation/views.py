@@ -121,3 +121,7 @@ def payment_success(request, transaction_id):
 
 def payment_failed(request):
     return render(request, 'reservation/payment_failed.html')
+
+def aceuill(request):
+
+    return render(request,"reservation/index.html")

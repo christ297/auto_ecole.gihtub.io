@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 #api key for paygate
 
-PAYGATE_API_TOKEN = 'votre_cle_api_paygate_global'
+PAYGATE_API_TOKEN = '9f013678-4ec8-4ac2-9758-b38df46672c7'
 
 # Application definition
 

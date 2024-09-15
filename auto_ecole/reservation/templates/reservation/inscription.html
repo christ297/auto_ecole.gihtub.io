@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'inscription - Auto-école</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Inscription à l'Agence de Formation Auto-école</h2>
+    <form id="inscriptionForm">
+        <!-- Informations personnelles -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom complet</label>
+            <input type="text" class="form-control" id="name" placeholder="Entrez votre nom complet" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Entrez votre email" required>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Numéro de téléphone</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Entrez votre numéro de téléphone" required>
+        </div>
+
+        <!-- Catégorie de véhicule -->
+        <div class="mb-3">
+            <label for="category" class="form-label">Catégorie de véhicule</label>
+            <select class="form-select" id="category" required>
+                <option value="">Sélectionnez une catégorie</option>
+                <option value="car">Voiture</option>
+                <option value="moto">Moto</option>
+            </select>
+        </div>
+
+        <!-- Choix de formule -->
+        <div class="mb-3">
+            <label for="formula" class="form-label">Formule choisie</label>
+            <select class="form-select" id="formula" required>
+                <option value="">Sélectionnez une formule</option>
+                <option value="complete">Formule complète</option>
+                <option value="accelerated">Formule accélérée</option>
+                <option value="theory">Théorie seulement</option>
+                <option value="practice">Pratique seulement</option>
+            </select>
+        </div>
+
+        <!-- Type de paiement -->
+        <div class="mb-3">
+            <label for="paymentType" class="form-label">Type de paiement</label>
+            <select class="form-select" id="paymentType" required>
+                <option value="">Sélectionnez un type de paiement</option>
+                <option value="now">Payer immédiatement</option>
+                <option value="later">Payer plus tard</option>
+            </select>
+        </div>
+
+        <!-- Options de paiement (cachées par défaut) -->
+        <div id="paymentOptions" class="mb-3" style="display: none;">
+            <label for="paymentMethod" class="form-label">Moyen de paiement</label>
+            <select class="form-select" id="paymentMethod">
+                <option value="">Sélectionnez un moyen de paiement</option>
+                <option value="creditCard">Carte de crédit</option>
+                <option value="paypal">PayPal</option>
+                <option value="bankTransfer">Virement bancaire</option>
+            </select>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+</div>
+
+<script>
+    // Fonction pour afficher/masquer les options de paiement
+    $(document).ready(function () {
+        $('#paymentType').change(function () {
+            if ($(this).val() === 'now') {
+                $('#paymentOptions').show();  // Affiche les options de paiement
+            } else {
+                $('#paymentOptions').hide();  // Cache les options de paiement
+            }
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
