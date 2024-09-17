@@ -33,6 +33,17 @@ ALLOWED_HOSTS = []
 
 PAYGATE_API_TOKEN = '9f013678-4ec8-4ac2-9758-b38df46672c7'
 
+
+#info sending mail contact
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Exemple avec Gmail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ton-email@gmail.com'
+EMAIL_HOST_PASSWORD = 'ton-mot-de-passe'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # Application definition
 
 INSTALLED_APPS = [

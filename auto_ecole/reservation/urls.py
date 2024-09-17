@@ -14,5 +14,6 @@ urlpatterns = [
     path('paiement/success/<int:transaction_id>/', views.payment_success, name='payment_success'),
     path('paiement/echec/', views.payment_failed, name='payment_failed'),
     path('aceuill',views.aceuill,name="index"),
+    path('inscription',views.inscription,name="inscrition"),
 
 ]

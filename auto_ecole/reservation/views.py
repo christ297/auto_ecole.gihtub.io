@@ -10,6 +10,9 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.conf import settings
 from .forms import PaymentForm
 from .models import Transaction
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render
 
 def reservation_view(request):
     if request.method == 'POST':
@@ -125,3 +128,26 @@ def payment_failed(request):
 def aceuill(request):
 
     return render(request,"reservation/index.html")
+
+
+#sending mail
+
+def contact_view(request):
+    if request.method == 'POST':
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        from_email = request.POST.get('email')
+        
+        send_mail(
+            subject,
+            message,
+            from_email,
+            [settings.DEFAULT_FROM_EMAIL],
+            fail_silently=False,
+        )
+        return render(request, 'contact_success.html')
+    return render(request, 'contact.html')
+
+
+def inscription(request):
+    return render(request,"reservation/inscription_test.html")
