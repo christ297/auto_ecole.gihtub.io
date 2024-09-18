@@ -5,9 +5,13 @@
     <title>Paiement Réussi</title>
 </head>
 <body>
+    
     <div class="container">
-        <h2>Paiement Réussi</h2>
+        <h2>Paiement Réussi Merci pour votre confiance à BASILEIA Nous vous contacterons dans les plus bref delais</h2>
         <p>Référence de la transaction : {{ transaction.tx_reference }}</p>
+        <a href="{% url 'reservation' %}" class="button text-align center">Télécharger Votre Facture  </a>
+        <a href="{% url 'reservation' %}" class="button text-align center">Faire une Réservation</a>
+
     </div>
 </body>
 </html>

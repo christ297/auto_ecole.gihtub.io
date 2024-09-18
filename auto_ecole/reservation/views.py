@@ -13,6 +13,7 @@ from .models import Transaction
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render
+from .models import Inscription
 
 def reservation_view(request):
     if request.method == 'POST':
@@ -134,12 +135,14 @@ def aceuill(request):
 
 def contact_view(request):
     if request.method == 'POST':
-        subject = request.POST.get('subject')
+        nom = request.POST.get('nom')
+        prenoms = request.POST.get('nom')
         message = request.POST.get('message')
         from_email = request.POST.get('email')
         
         send_mail(
-            subject,
+            nom,
+            prenoms,
             message,
             from_email,
             [settings.DEFAULT_FROM_EMAIL],
@@ -150,4 +153,38 @@ def contact_view(request):
 
 
 def inscription(request):
-    return render(request,"reservation/inscription_test.html")
+    if request.method == "POST":
+        # Récupérer les données postées
+        nom = request.POST.get('nom')
+        prenom = request.POST.get('prenoms')
+        email = request.POST.get('email')
+        telephone = request.POST.get('telephone')
+        ville = request.POST.get('ville')
+        categorie = request.POST.get('categorie')
+        formation = request.POST.get('formation')
+        typecours = request.POST.get('typecours')
+        avance = request.POST.get('avance')
+        
+        # Créer une instance du modèle Inscription avec les données récupérées
+        new_inscription = Inscription(
+            nom=nom,
+            prenom=prenom,
+            email=email,
+            telephone=telephone,
+            ville=ville,
+            categorie=categorie,
+            formation=formation,
+            typecours=typecours,
+            avance=avance
+        )
+        
+        # Sauvegarder dans la base de données
+        new_inscription.save()
+        if avance=="oui":
+            return redirect('payment')
+        
+        # Rediriger après la soumission
+        return render(request,"reservation/success_inscription.html") # Remplace 'success_page' par la route vers la page de succès.
+    
+    # Si la méthode n'est pas POST, on affiche simplement le formulaire
+    return render(request, "reservation/inscription_test.html")

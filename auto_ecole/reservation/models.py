@@ -34,3 +34,17 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"Transaction {self.identifier} - {self.phone_number}"
+
+class Inscription(models.Model):
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    telephone = models.CharField(max_length=20)
+    ville = models.CharField(max_length=100)
+    categorie = models.CharField(max_length=50)
+    formation = models.CharField(max_length=100)
+    typecours = models.CharField(max_length=50)
+    avance = models.CharField(max_length=10)  # Par exemple 'oui' ou 'non'
+    
+    def __str__(self):
+        return f'{self.nom} {self.prenom}'

@@ -20,30 +20,37 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav" style="background-color:#ffffff">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="static/images/basileia.png" alt="..." /></a>
+                <a class="navbar-brand" href="#page-top">
+                    <img src="static/images/basileia.png" alt="Logo" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Formations</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services" style="color:#000000">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio" style="color:#000000">Formations</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about" style="color:#000000">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team" style="color:#000000">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact" style="color:#000000">Contact</a></li>
                     </ul>
+                    <!-- Boutons de connexion et d'inscription -->
+                    <div class="d-flex ms-auto">
+                        <a class="btn btn-info btn-custom mx-2" href="#login" style=" background-color: #004AAD; border-color: #004AAD;">Connexion</a>
+                        <a class="btn btn-info btn-custom" href="{% url 'inscription' %}"" style=" background-color: #ffffff; color:#004AAD">Inscription</a>
+                    </div>
                 </div>
             </div>
         </nav>
         <!-- Masthead-->
         <header class="masthead">
             <div class="container text-start">
-                <div class="masthead-subheading">Welcome To Our Studio!</div>
-                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+                <div class="masthead-subheading">la conduite est une discipline </div>
+                <div class="masthead-heading text-uppercase"></div>
+                <a class="btn btn-info btn-xl text-uppercase" href="{% url 'inscription' %}" style=" background-color: #004AAD; border-color: #004AAD;">S'inscrire</a>
             </div>
         </header>
         <!-- Services-->
@@ -85,8 +92,8 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading text-uppercase">Nos Formations</h2>
+                    <h3 class="section-subheading text-muted">Découvrez nos formations professionnelles adaptées à tous les niveaux ! <br> (cliquez sur une formations pour telecharger la fiche de renseignement)</h3>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 mb-4">
@@ -96,7 +103,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/images/p3.png" alt="..." />
+                                <img class="img-fluid" src="static/assets/img/formation/1.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Motos <h6>( avec ou sans embrayage )</h6></div>
@@ -111,7 +118,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/images/p4.png" alt="..." />
+                                <img class="img-fluid" src="static/assets/img/formation/2.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Vehicules <h6>( Poids Léger )</h6></div>
@@ -126,7 +133,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="static/images/camion.avif" alt="..." />
+                                <img class="img-fluid" src="static/assets/img/formation/3.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Vehicules <h6>( Poids Lourd )</h6></div>
@@ -199,7 +206,7 @@
                                         <li>Advanced Analytics</li>
                                         <li>Custom Domains</li>
                                     </ul>
-                                    <button class="btn btn-custom btn-lg w-100">Choose Plan</button>
+                                    <button class="btn btn-custom btn-lg w-100" style="color:#003398; background-color:#ffffff">Choose Plan</button>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +226,7 @@
                                         <li>Advanced Analytics</li>
                                         <li>Custom Domains</li>
                                     </ul>
-                                    <button class="btn btn-custom btn-lg w-100">Choose Plan</button>
+                                    <button class="btn btn-custom btn-lg w-100" style="color:#003398; background-color:#ffffff">Choose Plan</button>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +245,7 @@
                                         <li>Advanced Analytics</li>
                                         <li>Custom Domains</li>
                                     </ul>
-                                    <button class="btn btn-custom btn-lg w-100">Choose Plan</button>
+                                    <button class="btn btn-custom btn-lg w-100" style="color:#003398; background-color:#ffffff">Choose Plan</button>
                                 </div>
                             </div>
                         </div>
@@ -295,41 +302,50 @@
                   </div>
             </div>
         </section>
-
+        <div class="text-align" style="font-size: 2rem; margin-bottom: 2rem; padding: 20px; width: 100%;">
+            <h2>Où Nous Trouvés ?</h2>
+          </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card mb-4"> <!-- Ajout de la classe mb-4 -->
-                        <div class="card-body card-body-end ">
-                            <h5 class="card-title">Ambassade du Togo à Lomé</h5>
+                    <div class="card mb-4"> 
+                    <a href="https://maps.app.goo.gl/Ze8kHUt5yELT647x9" style="text-decoration:none;">
+                        <div class="card-body card-body-end">
+                            <h5 class="card-title">Gbossime</h5>
                             <p class="card-text">
-                                Boulevard du 13 Janvier,<br>
-                                Lomé, Togo.
+                                Gbossime, non loin de la pharmacie<br>
+                                Atikoume, à 300 m devant l'entrée principale de la FUCEC
                             </p>
                         </div>
+                    </a>
                     </div>
                 </div>
+            
+
                 <div class="col-md-4">
                     <div class="card mb-4"> <!-- Ajout de la classe mb-4 -->
-                        <div class="card-body card-body-end">
-                            <h5 class="card-title">Université de Lomé</h5>
-                            <p class="card-text">
-                                Campus Nord,<br>
-                                BP 1515, Lomé, Togo.
-                            </p>
-                        </div>
+                        <a href="https://maps.app.goo.gl/7zmhptv32FMoEoPR8" style="text-decoration:none;">
+                            <div class="card-body card-body-end">
+                                <h5 class="card-title">Sanguera IPG</h5>
+                                <p class="card-text">
+                                    Sanguera, juste devant le lycée IPG<br>
+                                    Lomé, Togo.
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 "> <!-- Ajout de la classe mb-4 -->
-                        <div class="card-body card-body-end">
-                            <h5 class="card-title">Palais des Congrès de Lomé</h5>
-                            <p class="card-text">
-                                Quartier administratif,<br>
-                                Avenue de la Présidence,<br>
-                                Lomé, Togo.
-                            </p>
-                        </div>
+                        <a href="https://maps.app.goo.gl/Ze8kHUt5yELT647x9" style="text-decoration:none;">
+                            <div class="card-body card-body-end">
+                                <h5 class="card-title"> Sanguera klikame</h5>
+                                <p class="card-text">
+                                    Sanguera klikame, non loin du bar la couronne<br>
+                                    Lomé, Togo.
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -355,25 +371,25 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" name="nom" />
                                 <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                             </div>
                             <div class="form-group">
                                 <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" name="prenoms" />
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                             </div>
                             <div class="form-group mb-md-0">
                                 <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" name="telephone" />
                                 <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
                                 <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required" name="message"></textarea>
                                 <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                             </div>
                         </div>
