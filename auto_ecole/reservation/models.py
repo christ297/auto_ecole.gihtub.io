@@ -44,7 +44,9 @@ class Inscription(models.Model):
     categorie = models.CharField(max_length=50)
     formation = models.CharField(max_length=100)
     typecours = models.CharField(max_length=50)
-    avance = models.CharField(max_length=10)  # Par exemple 'oui' ou 'non'
+    avance = models.CharField(max_length=10)
+    date = models.DateField()
+
     
     def __str__(self):
         return f'{self.nom} {self.prenom}'

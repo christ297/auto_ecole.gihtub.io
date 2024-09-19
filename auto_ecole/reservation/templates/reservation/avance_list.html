@@ -41,14 +41,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for reservation in page_obj %}
+                {% for inscription in page_obj %}
                     <tr>
-                        <td>{{ reservation.nom }}</td>
-                        <td>{{ reservation.email }}</td>
+                        <td>{{ inscription.nom }}</td>
+                        <td>{{ inscription.email }}</td>
                         <!--<td>{{ reservation.numero }}</td> -->
-                        <td>{{ reservation.date_reservation }}</td>
-                        <td>{{ reservation.heure_reservation }}</td>
-                        <td>{{ reservation.get_type_vehicule_display }}</td>
+                        <td>{{ inscription.date_reservation }}</td>
+                        <td>{{ inscription.heure_reservation }}</td>
+                        <td>{{ inscription.get_type_vehicule_display }}</td>
                     </tr>
                 {% empty %}
                     <tr>

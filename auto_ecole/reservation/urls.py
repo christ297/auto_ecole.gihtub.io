@@ -15,5 +15,8 @@ urlpatterns = [
     path('paiement/echec/', views.payment_failed, name='payment_failed'),
     path('aceuill',views.aceuill,name="index"),
     path('inscription',views.inscription,name="inscription"),
+    path('clients_inscrits',views.inscription_list_view,name="inscription_list"),
+    path('dashboard',views.dashboard,name="dashboard"),
+    path('aceuill_dashboard',views.acceuil_dashboard,name="acceuil_dashboard"),
 
 ]
