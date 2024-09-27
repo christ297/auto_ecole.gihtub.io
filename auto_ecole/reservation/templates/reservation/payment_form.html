@@ -2,32 +2,116 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paiement</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .payment-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .payment-card h2 {
+            color: #003398;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background-color: #003398;
+            color: #ffffff;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .btn-custom:hover {
+            background-color: grey;
+            color: blue;
+        }
+    </style>
 </head>
 <body>
+
     <div class="container mt-5">
-        <h2 class="text-center">Demande de Paiement</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                {{ form.phone_number.label_tag }}
-                {{ form.phone_number }}
-            </div>
-            <div class="mb-3">
-                {{ form.amount.label_tag }}
-                {{ form.amount }}
-            </div>
-            <div class="mb-3">
-                {{ form.description.label_tag }}
-                {{ form.description }}
-            </div>
-            <div class="mb-3">
-                {{ form.network.label_tag }}
-                {{ form.network }}
-            </div>
-            <button type="submit" class="btn btn-primary">Payer</button>
-        </form>
+        <div class="payment-card">
+            <h2 class="text-center">Demande de Paiement</h2>
+
+            <!-- Formulaire de paiement -->
+            <form method="POST" id="payment-form" action="{% url 'payment' %}">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <input type="text" id="firstname" name="firstname" placeholder="Prénom" class="form-control" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="text" id="lastname" name="lastname" placeholder="Nom" class="form-control" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="email" id="email" name="email" placeholder="Email" class="form-control" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="number" id="amount" name="amount" placeholder="Montant" class="form-control" required>
+                </div>
+                
+                <button type="button" id="pay-btn" class="btn btn-custom">Payer</button>
+            </form>
+        </div>
     </div>
+
+    <!-- FedaPay Checkout -->
+    <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+    <script type="text/javascript">
+        document.getElementById('pay-btn').addEventListener('click', function() {
+            // Désactiver le bouton pour éviter des clics multiples
+            var payButton = document.getElementById('pay-btn');
+            // Récupérer les valeurs du formulaire
+            var firstname = document.getElementById('firstname').value;
+            var lastname = document.getElementById('lastname').value;
+            var email = document.getElementById('email').value;
+            var amount = document.getElementById('amount').value;
+
+            // Validation des champs du formulaire avant d'initialiser le paiement
+            if (firstname && lastname && email && amount) {
+                // Initialisation du paiement avec FedaPay
+                FedaPay.init('#pay-btn', {
+                    public_key: 'pk_sandbox_UzX-oxdzlDOQrunZHEp9lwiN',
+                    transaction: {
+                        amount: amount ,  // FedaPay accepte le montant en centimes
+                        description: 'Paiement de service'
+                    },
+                    customer: {
+                        email: email,
+                        lastname: lastname,
+                        firstname: firstname,
+                    },
+                    
+                    onError: function() {
+                        // En cas d'erreur, réactiver le bouton
+                        alert("Une erreur est survenue lors du paiement.");
+                    }
+                });
+            } else {
+                // Si les champs ne sont pas remplis, réactiver le bouton et afficher un message
+                alert("Veuillez remplir tous les champs.");
+            }
+        });
+    </script>
 </body>
 </html>

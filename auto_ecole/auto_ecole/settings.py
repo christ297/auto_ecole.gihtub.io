@@ -29,9 +29,12 @@ ALLOWED_HOSTS = []
 
 
 
-#api key for paygate
+#api key for fedapay
 
-PAYGATE_API_TOKEN = '9f013678-4ec8-4ac2-9758-b38df46672c7'
+
+
+FEDAPAY_PUBLIC_KEY = 'pk_sandbox_UzX-oxdzlDOQrunZHEp9lwiN'
+FEDAPAY_SECRET_KEY = 'sk_sandbox_NiDO5aIfUkuL2KyH8H6LSg7Z'
 
 
 #info sending mail contact
@@ -40,8 +43,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Exemple avec Gmail
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ton-email@gmail.com'
-EMAIL_HOST_PASSWORD = 'ton-mot-de-passe'
+EMAIL_HOST_USER = 'christlearn834@gmail.com'
+EMAIL_HOST_PASSWORD = 'howz fahh wteu wbck'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Application definition

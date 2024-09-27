@@ -142,6 +142,8 @@ hr {
             min-height: 150px;
         }
 
+/*animation fade in */
+
 
 
 /*navbar*/
@@ -201,7 +203,7 @@ hr {
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 255, 200, 0;
+  --bs-primary-rgb:0, 51, 153;
   --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -11160,7 +11162,7 @@ header.masthead .masthead-heading {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(255, 200, 0, 0.9);
+  background: rgba(0, 51, 153, 1);
   align-items: center;
   justify-content: center;
   opacity: 0;

@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Liste des Clients Enregistrés</h2>
+        <h2 class="text-center mb-4">Liste des Réservations </h2>
 
         <form method="GET" class="row g-3 mb-4">
             {% csrf_token %}
@@ -34,7 +34,7 @@
                 <tr>
                     <th>Nom</th>
                     <th>Email</th>
-                    <!--<th>Numéro</th>-->
+                    <th>Téléphone</th>
                     <th>Date de réservation</th>
                     <th>Heure de réservation</th>
                     <th>Type de véhicule</th>
@@ -45,7 +45,7 @@
                     <tr>
                         <td>{{ reservation.nom }}</td>
                         <td>{{ reservation.email }}</td>
-                        <!--<td>{{ reservation.numero }}</td> -->
+                        <td>{{ reservation.numero }}</td>
                         <td>{{ reservation.date_reservation }}</td>
                         <td>{{ reservation.heure_reservation }}</td>
                         <td>{{ reservation.get_type_vehicule_display }}</td>

@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from .forms import ReservationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -8,14 +9,16 @@ import requests
 import uuid
 from django.shortcuts import render, redirect,get_object_or_404
 from django.conf import settings
-from .forms import PaymentForm
-from .models import Transaction
+from .models import Payment
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render
 from .models import Inscription
-from datetime import date
+from datetime import date 
 from django.utils import timezone
+# views.py
+
+from fedapay import *
 
 
 def reservation_view(request):
@@ -37,7 +40,7 @@ def admin_login_view(request):
         
         if user is not None:
             login(request, user)
-            return redirect('clients')  # Redirection vers la page des clients
+            return redirect('acceuil_dashboard')  # Redirection vers la page des clients
         else:
             messages.error(request, 'Identifiants invalides.')
     
@@ -74,59 +77,35 @@ def clients_list_view(request):
     })
 
 
-def payment_view(request):
-    if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.identifier = str(uuid.uuid4())  # Générer un identifiant unique
-            transaction.save()
-
-            # Paramètres requis pour l'API PayGateGlobal
-            payload = {
-                "auth_token": settings.PAYGATE_API_TOKEN,
-                "phone_number": transaction.phone_number,
-                "amount": str(transaction.amount),
-                "description": transaction.description,
-                "identifier": transaction.identifier,
-                "network": transaction.network,
-            }
-
-            # URL de l'API PayGateGlobal
-            url = "https://paygateglobal.com/api/v1/pay"
-
-            try:
-                response = requests.post(url, json=payload)
-                data = response.json()
-
-                if data.get('status') == "0":
-                    # Transaction initiée avec succès
-                    transaction.tx_reference = data.get('tx_reference')
-                    transaction.status = "Transaction enregistrée"
-                    transaction.save()
-                    return redirect('payment_success', transaction_id=transaction.id)
-                else:
-                    # Gérer les erreurs de transaction
-                    transaction.status = "Erreur lors de l'enregistrement"
-                    transaction.save()
-                    return redirect('payment_failed')
-
-            except Exception as e:
-                # Gérer les exceptions
-                print(f"Erreur: {e}")
-                return redirect('payment_failed')
-    else:
-        form = PaymentForm()
-
-    return render(request, 'reservation/payment_form.html', {'form': form})
 
 
-def payment_success(request, transaction_id):
-    transaction = get_object_or_404(Transaction, id=transaction_id)
-    return render(request, 'reservation/payment_success.html', {'transaction': transaction})
+def initiate_payment(request):
+    
+    if request.method=='POST':
+        lastname=request.POST.get('lastname')
+        firstname=request.POST.get('firstname')
+        amount=request.POST.get('amount')
+        email=request.POST.get('email')
+        return render(request,"reservation/payment_form.html",{
+            "firstname":firstname,
+            "lastname":lastname,
+            "amount":amount,
+            "email":email
 
-def payment_failed(request):
-    return render(request, 'reservation/payment_failed.html')
+        })
+
+
+
+def payment_success(request):
+    transaction_id = request.GET.get('id')
+    payment = get_object_or_404(Payment, transaction_id=transaction_id)
+    
+    # Mettre à jour le statut du paiement
+    payment.status = 'success'
+    payment.save()
+    
+    return render(request, 'payment_success.html', {'payment': payment})
+
 
 def aceuill(request):
 
@@ -187,7 +166,7 @@ def inscription(request):
         # Sauvegarder dans la base de données
         new_inscription.save()
         if avance=="oui":
-            return redirect('payment')
+            return render(request,"reservation/payment_form.html")
         
         # Rediriger après la soumission
         return render(request,"reservation/success_inscription.html") # Remplace 'success_page' par la route vers la page de succès.
@@ -276,6 +255,7 @@ def acceuil_dashboard(request):
     today = date.today()
     clients_today = Inscription.objects.filter(date=today).count()
 
+    
     # Passer les statistiques au template
     context = {
         'total_inscriptions': total_inscriptions,

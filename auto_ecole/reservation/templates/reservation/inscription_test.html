@@ -1,104 +1,154 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Basileia</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <!-- Core theme CSS (includes Bootstrap)-->
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Basileia</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" />
+    <!-- Bootstrap 5.0.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Montserrat', sans-serif;
+        }
 
+        .form-container {
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
+        h2 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #343a40;
+            text-align: center;
+        }
 
+        label {
+            font-weight: bold;
+            color: #495057;
+        }
 
-<form class="container" action="{% url 'inscription' %}" method="POST">
-    {% csrf_token %}
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="nom">Nom</label>
-        <input type="text" class="form-control" id="nom" placeholder="nom" name="nom">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="prenoms">Prénoms</label>
-        <input type="text" class="form-control" id="prenoms" placeholder="prenoms" name="prenoms">
-      </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+            font-size: 16px;
+            padding: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            box-shadow: none;
+        }
+
+        .form-check-label {
+            color: #6c757d;
+        }
+
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centered-container">
+        <div class="container form-container col-lg-6 col-md-8 col-sm-10">
+            <h2>Inscription à Basileia</h2>
+            <form action="{% url 'inscription' %}" method="POST">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prenoms">Prénoms</label>
+                        <input type="text" class="form-control" id="prenoms" placeholder="Prénoms" name="prenoms" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telephone">Numéro de téléphone</label>
+                        <input type="text" class="form-control" id="telephone" placeholder="ex +228 97252233" name="telephone" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="inputCity">Ville</label>
+                        <input type="text" class="form-control" id="inputCity" name="ville" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputState">Type de formation</label>
+                        <select id="inputState" class="form-control" name="formation" required>
+                            <option disabled>Choisir</option>
+                            <option>Normale</option>
+                            <option>Accélérée</option>
+                            <option>Non Accélérée</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="avance">Voulez-vous payer une avance ?</label>
+                        <select id="avance" class="form-control" name="avance" required>
+                            <option value="oui" selected>Oui</option>
+                            <option value="non">Non</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="categorie">Catégorie</label>
+                        <select id="categorie" class="form-control" name="categorie" required>
+                            <option value="A" selected>A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="typecours">Type de cours</label>
+                        <select id="typecours" class="form-control" name="typecours" required>
+                            <option value="En Présentiel" selected>En Présentiel</option>
+                            <option value="En Ligne">En Ligne</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                    <label class="form-check-label" for="gridCheck">J'accepte les termes et conditions</label>
+                </div>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
         </div>
-        <div class="form-group col-md-6">
-          <label for="telephone">Numero de telephone</label>
-          <input type="text" class="form-control" id="telephone" placeholder=" ex +228 97252233" name="telephone">
-        </div>
-      </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">Ville</label>
-        <input type="text" class="form-control" id="inputCity" name="ville">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">Type de formations</label>
-        <select id="inputState" class="form-control" name="formation">
-          <option selected>Choisir</option>
-          <option>Normale</option>
-          <option>Accélérée</option>
-          <option>Non Accélérée</option>
-          <option>Normale</option>
-
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">Voulez vous payer une avance</label>
-        <select id="inputState" class="form-control" name="avance">
-          <option value="oui" selected>oui</option>
-          <option value="non">non</option>
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">Catégorie</label>
-        <select id="inputState" class="form-control" name="categorie">
-          <option value="A" selected>A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputcours">Type de cours</label>
-        <select id="inputcours" class="form-control" name="typecours">
-          <option value="En Présentiel" selected> En Présentiel</option>
-          <option value="En Ligne">En Ligne</option>
-        </select>
-      </div>
     </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    </body>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+</body>
 </html>

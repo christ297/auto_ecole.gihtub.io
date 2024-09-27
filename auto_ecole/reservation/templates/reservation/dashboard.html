@@ -4,45 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            width: 220px;
+            background-color: #e9ecef; /* Gris clair */
+        }
+
+        .sidebar .nav-link {
+            color: #495057; /* Gris foncé */
+            font-weight: 500;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .sidebar .nav-link.active {
+            color: #ffffff;
+            background-color: #6c757d; /* Gris moyen pour l'élément actif */
+            border-radius: 5px;
+        }
+
+        .sidebar .nav-link:hover {
+            color: #ffffff;
+            background-color: #adb5bd; /* Gris légèrement plus foncé au survol */
+        }
+
+        .sidebar .nav-item + .nav-item {
+            margin-top: 5px;
+        }
+
+        main {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: #007bff; /* Couleur bleue pour la navbar */
+            padding: 10px;
+        }
+
+        .navbar .navbar-brand {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Barre de menu à droite -->
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'acceuil_dashboard' %}">
-                                Accueil
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'clients' %}">
-                                Réservation
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'clients' %}">
-                                Avance
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inscription_list' %}">
-                                Inscription
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
 
-            <!-- Contenu principal -->
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                {% block content %}
-                {% endblock %}
-            </main>
+    <!-- Barre latérale -->
+    <nav class="sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'acceuil_dashboard' %}">
+                        Accueil
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'clients' %}">
+                        Réservation
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'clients' %}">
+                        Avance
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inscription_list' %}">
+                        Inscription
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main role="main">
+        <!-- Navbar en haut -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Tableau de Bord</a>
+        </nav>
+
+        <!-- Section de contenu -->
+        <div class="content">
+            {% block content %}
+            <!-- Contenu dynamique -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
