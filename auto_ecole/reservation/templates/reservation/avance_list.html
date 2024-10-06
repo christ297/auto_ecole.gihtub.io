@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Liste des Clients Enregistrés</h2>
+        <h2 class="text-center mb-4">Liste des Avances Clients </h2>
 
         <form method="GET" class="row g-3 mb-4">
             {% csrf_token %}
@@ -34,10 +34,10 @@
                 <tr>
                     <th>Nom</th>
                     <th>Email</th>
-                    <!--<th>Numéro</th>-->
-                    <th>Date de réservation</th>
-                    <th>Heure de réservation</th>
-                    <th>Type de véhicule</th>
+                    <th>Numéro</th>
+                    <th>Date</th>
+                    <th>Catégorie</th>
+                    <th>Type de cours</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,10 +45,10 @@
                     <tr>
                         <td>{{ inscription.nom }}</td>
                         <td>{{ inscription.email }}</td>
-                        <!--<td>{{ reservation.numero }}</td> -->
-                        <td>{{ inscription.date_reservation }}</td>
-                        <td>{{ inscription.heure_reservation }}</td>
-                        <td>{{ inscription.get_type_vehicule_display }}</td>
+                        <td>{{ inscription.telephone }}</td>
+                        <td>{{ inscription.date }}</td>
+                        <td>{{ inscription.categorie }}</td>
+                        <td>{{ inscription.typecours }}</td>
                     </tr>
                 {% empty %}
                     <tr>

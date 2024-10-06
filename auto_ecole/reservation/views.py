@@ -16,9 +16,8 @@ from django.shortcuts import render
 from .models import Inscription
 from datetime import date 
 from django.utils import timezone
-# views.py
-
 from fedapay import *
+from django.contrib.auth import login , logout
 
 
 def reservation_view(request):
@@ -46,6 +45,9 @@ def admin_login_view(request):
     
     return render(request, 'reservation/admin_login.html')
 
+def logout_view(request):
+    logout(request) 
+    return redirect('admin_login')
 
 @login_required  # Limite l'accès aux utilisateurs authentifiés
 def clients_list_view(request):
@@ -99,8 +101,7 @@ def initiate_payment(request):
 def payment_success(request):
     transaction_id = request.GET.get('id')
     payment = get_object_or_404(Payment, transaction_id=transaction_id)
-    
-    # Mettre à jour le statut du paiement
+
     payment.status = 'success'
     payment.save()
     
@@ -135,7 +136,7 @@ def contact_view(request):
 
 def inscription(request):
     if request.method == "POST":
-        # Récupérer les données postées
+    
         nom = request.POST.get('nom')
         prenom = request.POST.get('prenoms')
         email = request.POST.get('email')
@@ -149,7 +150,7 @@ def inscription(request):
 
 
         
-        # Créer une instance du modèle Inscription avec les données récupérées
+        
         new_inscription = Inscription(
             nom=nom,
             prenom=prenom,
@@ -163,15 +164,14 @@ def inscription(request):
             date=createAt,
         )
         
-        # Sauvegarder dans la base de données
+        
         new_inscription.save()
         if avance=="oui":
             return render(request,"reservation/payment_form.html")
         
-        # Rediriger après la soumission
-        return render(request,"reservation/success_inscription.html") # Remplace 'success_page' par la route vers la page de succès.
+        
+        return render(request,"reservation/success_inscription.html")
     
-    # Si la méthode n'est pas POST, on affiche simplement le formulaire
     return render(request, "reservation/inscription_test.html")
 
 def dashboard(request):
@@ -179,7 +179,7 @@ def dashboard(request):
     return render(request,"reservation/dashboard.html")
 
 
-@login_required  # Limite l'accès aux utilisateurs authentifiés
+@login_required
 def inscription_list_view(request):
    # reservations = Reservation.objects.all()
    # return render(request, 'reservation/clients_list.html', {'reservations': reservations})
@@ -218,7 +218,7 @@ def avance_list_view(request):
     query_date = request.GET.get('date')  # Rechercher par date
 
     # Filtrer les résultats
-    inscriptions = Inscription.objects.all().filter(Inscription.avance=="oui" and Transaction.status is not None)
+    inscriptions = Inscription.objects.filter(avance="oui")
 
     if query_nom:
         inscriptions = inscriptions.filter(nom__icontains=query_nom)  # Recherche insensible à la casse
@@ -231,7 +231,7 @@ def avance_list_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'reservation/clients_list.html', {
+    return render(request, 'reservation/avance_list.html', {
         'page_obj': page_obj,
         'paginator':paginator,
         'page_number':page_number,
@@ -240,7 +240,7 @@ def avance_list_view(request):
     })
 
 
-
+@login_required 
 def acceuil_dashboard(request):
     # Récupérer le nombre total de personnes inscrites
     total_inscriptions = Inscription.objects.count()
@@ -265,3 +265,4 @@ def acceuil_dashboard(request):
     }
 
     return render(request, 'reservation/acceuil_dashboard.html', context)
+

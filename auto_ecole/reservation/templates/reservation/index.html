@@ -33,8 +33,7 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#services" style="color:#000000">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio" style="color:#000000">Formations</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about" style="color:#000000">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team" style="color:#000000">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about" style="color:#000000">Plan</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact" style="color:#000000">Contact</a></li>
                     </ul>
                     <!-- Boutons de connexion et d'inscription -->
@@ -48,7 +47,7 @@
         <!-- Masthead-->
         <header class="masthead fade">
             <div class="container text-start">
-                <div class="masthead-subheading">la conduite est une discipline </div>
+                <div class="masthead-subheading">Préparez-vous à conduire avec assurance <br/> et sécurité, accompagné par des experts passionnés ! </div>
                 <div class="masthead-heading text-uppercase"></div>
                 <a class="btn btn-info btn-xl text-uppercase" href="{% url 'inscription' %}" style=" background-color: #004AAD; border-color: #004AAD;">S'inscrire</a>
             </div>
@@ -192,7 +191,7 @@
                                 <img class="img-fluid" src="static/assets/img/formation/3.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading"><h6>Formation complète non accélérée</h6></div>
+                                <div class="portfolio-caption-heading"><h6>Formation Poids Lourd</h6></div>
                                 <div class="portfolio-caption-subheading text-muted">Categorie:A,B</div>
                             </div>
                         </div>
@@ -202,73 +201,122 @@
         </section>
         <!-- About-->
         <section class="page-section" id="about">
-            <div class="container d-inline-flex justify-content-center">
-                <!-- Formation complète non accélérée -->
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="pricing-card mb-4">
-                                <div class="card-body card-body-card text-center p-5 position-relative">
-                                    <h3 class="mb-4 text-white">Formation complète non accélérée</h3>
-                                    <div class="price mb-4"><small>70.000 FCFA</small>/mo</div>
-                                    <ul class="feature-list mb-4">
-                                        <li>Flexibilité totale : apprenez à votre rythme</li>
-                                        <li>Encadrement personnalisé et suivi régulier</li>
-                                        <li>Sessions pratiques illimitées jusqu'à la maîtrise</li>
-                                        <li>Accès à des ressources pédagogiques avancées</li>
-                                    </ul>
-                                    <a href="{% url 'inscription' %}"> <button class="btn btn-custom btn-lg w-100" style="color:#003398; background-color:#ffffff">Inscrivez-vous</button></a>
-                                </div>
-                            </div>
+            <style>
+                .pricing-card {
+                    width: 100%;
+                    max-width: 280px;
+                    margin: 15px;
+                    transition: transform 0.3s, background-color 0.3s;
+                }
+            
+                .pricing-card:hover,
+                .pricing-card.selected {
+                    background-color: #000;
+                    color: #fff;
+                    transform: scale(1.05);
+                }
+            
+                .pricing-card .btn-custom {
+                    background-color: #fff;
+                    color: #003398;
+                }
+            
+                .pricing-card.selected .btn-custom {
+                    background-color: #000;
+                    color: #fff;
+                }
+            
+                .pricing-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            </style>
+            
+            <div class="container py-5">
+                <div class="pricing-container">
+                    <!-- Formation Classique -->
+                    <div class="pricing-card" onclick="selectCard(this)">
+                        <div class="card-body text-center p-4">
+                            <h3 class="mb-3">Formation Classique</h3>
+                            <div class="price mb-3">40.000 FCFA<small>/mo</small></div>
+                            <ul class="feature-list mb-3">
+                                <li>Apprenez à votre rythme sans contraintes</li>
+                                <li>Encadrement de base pour débutants</li>
+                                <li>Sessions de conduite régulières</li>
+                                <li>Accès limité aux ressources en ligne</li>
+                            </ul>
+                            <a href="{% url 'inscription' %}">
+                                <button class="btn btn-custom btn-sm w-100">Inscrivez-vous</button>
+                            </a>
                         </div>
                     </div>
-                </div>
-        
-                <!-- Formation Normale -->
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="pricing-card mb-4">
-                                <div class="card-body card-body-card text-center p-5 position-relative">
-                                    <span class="popular-badge">Plus populaire</span>
-                                    <h3 class="mb-4 text-white">Formation Normale</h3>
-                                    <div class="price mb-4">65.000 FCFA<small>/mo</small></div>
-                                    <ul class="feature-list mb-4">
-                                        <li>Un programme équilibré pour progresser rapidement</li>
-                                        <li>Encadrement professionnel 6 jours sur 7</li>
-                                        <li>Pratique en conditions réelles avec suivi expert</li>
-                                        <li>Accès aux examens théoriques et pratiques</li>
-                                    </ul>
-                                   <a href="{% url 'inscription' %}"> <button class="btn btn-custom btn-lg w-100" style="color:#003398; background-color:#ffffff">Inscrivez-vous</button></a>
-                                </div>
-                            </div>
+            
+                    <!-- Formation Standard -->
+                    <div class="pricing-card" onclick="selectCard(this)">
+                        <div class="card-body text-center p-4">
+                            <h3 class="mb-3">Formation Standard</h3>
+                            <div class="price mb-3">60.000 FCFA<small>/mo</small></div>
+                            <ul class="feature-list mb-3">
+                                <li>Programme structuré pour un apprentissage solide</li>
+                                <li>Encadrement professionnel 5 jours sur 7</li>
+                                <li>Pratique régulière et accès aux simulations</li>
+                                <li>Accès aux examens théoriques et pratiques</li>
+                            </ul>
+                            <a href="{% url 'inscription' %}">
+                                <button class="btn btn-custom btn-sm w-100">Inscrivez-vous</button>
+                            </a>
                         </div>
                     </div>
-                </div>
-        
-                <!-- Formation complète accélérée -->
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="pricing-card mb-4">
-                                <div class="card-body card-body-card text-center p-5 position-relative">
-                                    <h3 class="mb-4 text-white">Formation complète accélérée</h3>
-                                    <div class="price mb-4">90.000 FCFA<small>/mo</small></div>
-                                    <ul class="feature-list mb-4">
-                                        <li>Obtenez votre permis en un temps record</li>
-                                        <li>Coaching intensif avec instructeurs dédiés</li>
-                                        <li>Sessions de conduite quotidiennes accélérées</li>
-                                        <li>Résultats garantis grâce à un programme condensé</li>
-                                    </ul>
-                                    <a href="{% url 'inscription' %}"> <button class="btn btn-custom btn-lg w-100" style="color:#003398; background-color:#ffffff">Inscrivez-vous</button></a>
-                                </div>
-                            </div>
+            
+                    <!-- Formation Premium -->
+                    <div class="pricing-card" onclick="selectCard(this)">
+                        <div class="card-body text-center p-4">
+                            <h3 class="mb-3">Formation Premium</h3>
+                            <div class="price mb-3">80.000 FCFA<small>/mo</small></div>
+                            <ul class="feature-list mb-3">
+                                <li>Accompagnement personnalisé pour chaque étape</li>
+                                <li>Pratique intensive avec instructeur dédié</li>
+                                <li>Accès illimité aux ressources pédagogiques</li>
+                                <li>Accès prioritaire aux sessions de révision</li>
+                            </ul>
+                            <a href="{% url 'inscription' %}">
+                                <button class="btn btn-custom btn-sm w-100">Inscrivez-vous</button>
+                            </a>
+                        </div>
+                    </div>
+            
+                    <!-- Formation VIP -->
+                    <div class="pricing-card" onclick="selectCard(this)">
+                        <div class="card-body text-center p-4">
+                            <h3 class="mb-3">Formation VIP</h3>
+                            <div class="price mb-3">300.000 FCFA<small>/mo</small></div>
+                            <ul class="feature-list mb-3">
+                                <li>Accès à toutes les ressources, sans aucune limite</li>
+                                <li>Coaching exclusif avec instructeurs expérimentés</li>
+                                <li>Frais d'examens inclus et possibilité de repasser les tests gratuitement</li>
+                                <li>Support premium 7 jours sur 7</li>
+                            </ul>
+                            <a href="{% url 'inscription' %}">
+                                <button class="btn btn-custom btn-sm w-100">Inscrivez-vous</button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        
+            
+            <script>
+                function selectCard(element) {
+                    // Remove the 'selected' class from all cards
+                    document.querySelectorAll('.pricing-card').forEach(card => card.classList.remove('selected'));
+            
+                    // Add the 'selected' class to the clicked card
+                    element.classList.add('selected');
+                }
+            </script>
+            
+                
+            </section>
         <!--kpi s-->
         <section class="page-section" id="kpi">
             <div class="container">
@@ -429,13 +477,14 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; Basileia | christ keli</div>
                     <div class="col-lg-4 my-3 my-lg-0">
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-end">
+                        <a href="{% url 'admin_login' %}" class="d-flex justify-content-end text-muted mt-4">Admin</a>
                         <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
                         <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
                     </div>
@@ -457,7 +506,7 @@
                                     <!-- Détails de la formation accélérée -->
                                     <h2 class="text-uppercase">Formation Accélérée</h2>
                                     <p class="item-intro text-muted">Formation idéale pour ceux qui veulent obtenir leur permis rapidement.</p>
-                                    <img class="img-fluid d-block mx-auto" src="static/assets/img/formation/1.png" alt="Formation accélérée" />
+                                    <img class="img-fluid d-block mx-auto" src="static/assets/img/formation/2.png" alt="Formation accélérée" />
                                     <p>
                                         Notre programme de formation accélérée vous permet d'obtenir votre permis en un temps record. Bénéficiez de sessions intensives avec nos instructeurs experts, des cours théoriques et pratiques condensés, et une approche personnalisée pour vous garantir les meilleures chances de succès.
                                     </p>
@@ -466,7 +515,7 @@
                                         <li><strong>Catégories:</strong> A, B</li>
                                         <li><strong>Prix:</strong> 90.000 FCFA</li>
                                     </ul>
-                                    <a href="static/assets/img/formation/2.png">
+                                    <a href="static/pdf/Accelere.pdf">
                                         <button class="btn btn-primary text-uppercase" data-bs-dismiss="modal" type="button" style="background-color: rgba(0, 51, 153, 0.9); font-size: 14px;">
                                             <i class="fas fa-download me-1"></i>
                                             Télécharger la fiche de renseignements
@@ -494,7 +543,7 @@
                                     <!-- Détails de la formation normale -->
                                     <h2 class="text-uppercase">Formation Normale</h2>
                                     <p class="item-intro text-muted">Un programme complet pour ceux qui veulent apprendre à un rythme équilibré.</p>
-                                    <img class="img-fluid d-block mx-auto" src="static/assets/img/formation/2.png" alt="Formation normale" />
+                                    <img class="img-fluid d-block mx-auto" src="static/assets/img/formation/1.png" alt="Formation normale" />
                                     <p>
                                         La formation normale est idéale pour ceux qui souhaitent obtenir leur permis sans précipitation. Avec un programme bien structuré, des cours théoriques en salle et des sessions de conduite régulières, cette formation vous permet de progresser à votre propre rythme tout en bénéficiant de l’encadrement de nos instructeurs.
                                     </p>
@@ -503,10 +552,12 @@
                                         <li><strong>Catégories:</strong> A, B</li>
                                         <li><strong>Prix:</strong> 65.000 FCFA</li>
                                     </ul>
+                                    <a href="static/pdf/Normal.pdf">
                                     <button class="btn btn-primary text-uppercase" data-bs-dismiss="modal" type="button" style="background-color: rgba(0, 51, 153, 0.9); font-size: 14px;">
                                         <i class="fas fa-download me-1"></i>
                                         Télécharger la fiche de renseignements
                                     </button>
+                                </a>
                                 </div>
                             </div>
                         </div>
@@ -527,21 +578,23 @@
                             <div class="col-lg-8">
                                 <div class="modal-body">
                                     <!-- Détails de la formation non accélérée -->
-                                    <h2 class="text-uppercase">Formation Complète Non Accélérée</h2>
+                                    <h2 class="text-uppercase">Formation Poids Lourd</h2>
                                     <p class="item-intro text-muted">Une formation adaptée à ceux qui souhaitent apprendre à leur rythme.</p>
                                     <img class="img-fluid d-block mx-auto" src="static/assets/img/formation/3.png" alt="Formation complète non accélérée" />
                                     <p>
-                                        La formation complète non accélérée offre un programme totalement flexible, parfait pour les élèves qui veulent prendre leur temps pour maîtriser toutes les compétences nécessaires à la conduite. Vous bénéficierez de sessions illimitées de conduite et d’un suivi personnalisé jusqu'à ce que vous soyez prêt pour l'examen.
+                                        Notre formation en conduite de poids lourd est conçue pour vous fournir toutes les compétences nécessaires pour devenir un conducteur professionnel. Vous aurez accès à des sessions de conduite illimitées, vous permettant de vous entraîner à votre rythme. Avec un suivi personnalisé de nos instructeurs expérimentés, vous serez préparé pour passer votre examen et maîtriser la conduite de véhicules lourds en toute confiance. Inscrivez-vous dès aujourd'hui et lancez votre carrière dans le transport !
                                     </p>
                                     <ul class="list-inline">
                                         <li><strong>Durée:</strong> Jusqu'à 3 mois</li>
-                                        <li><strong>Catégories:</strong> A, B</li>
-                                        <li><strong>Prix:</strong> 50.000 FCFA</li>
+                                        <li><strong>Catégories:</strong> A, B,C,D</li>
+                                        <li><strong>Prix:</strong> Sur rendez-Vous</li>
                                     </ul>
+                                    <a href="static/pdf/Poids-lourd.pdf">
                                     <button class="btn btn-primary text-uppercase" data-bs-dismiss="modal" type="button" style="background-color: rgba(0, 51, 153, 0.9); font-size: 14px;">
                                         <i class="fas fa-download me-1"></i>
                                         Télécharger la fiche de renseignements
                                     </button>
+                                </a>
                                 </div>
                             </div>
                         </div>
